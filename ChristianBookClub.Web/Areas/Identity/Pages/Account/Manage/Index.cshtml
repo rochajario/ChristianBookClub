@@ -1,0 +1,42 @@
+﻿@page
+@using ChristianBookClub.Web.Areas.Identity.Pages.Account.Manage
+@model IndexModel
+@{
+	ViewData["Title"] = "Perfil";
+	ViewData["ActivePage"] = ManageNavPages.Index;
+}
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="alert alert-warning my-3" role="alert">
+	<p class="alert-heading lead fs-5 fw-bold text-roxborough">Emissão de Certificados</p>
+	<small class="lead fs-6">Para realizar a emissão de certificados é necessário completar o cadastro de informações na plataforma.</small>
+</div>
+<h3 class="fs-4 fw-semibold">@ViewData["Title"]</h3>
+<div class="row">
+	<div class="col-md-6 mt-3">
+		<form id="profile-form" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+			<div class="form-floating mb-3 lead fs-6">
+				<input asp-for="Input.Firstname" class="form-control" placeholder="Informe o primeiro nome" />
+				<label asp-for="Input.Firstname" class="form-label"></label>
+			</div>
+			<div class="form-floating mb-3 lead fs-6">
+				<input asp-for="Input.Surename" class="form-control" placeholder="Informe o sobrenome" />
+				<label asp-for="Input.Surename" class="form-label"></label>
+			</div>
+			<div class="form-floating mb-3 lead fs-6">
+				<input asp-for="Input.TelegramId" class="form-control" placeholder="Informe o Id do Chat no Telegram" />
+				<label asp-for="Input.TelegramId" class="form-label"></label>
+			</div>
+			<div class="form-floating mb-3 lead fs-6">
+				<input asp-for="Input.PhoneNumber" class="form-control" placeholder="Informe o número de telefone" />
+				<label asp-for="Input.PhoneNumber" class="form-label"></label>
+				<span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+			</div>
+			<button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-outline-secondary mb-3">Salvar</button>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

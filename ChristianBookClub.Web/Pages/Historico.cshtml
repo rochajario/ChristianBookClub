@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Manage.Internal
+@model ChristianBookClub.Web.Pages.HistoricoModel
+@{
+	ViewData["Title"] = "Histórico";
+}
+
+<main class="container">
+	@if (Model.CertficatesEnabled is false)
+	{
+		<div class="alert alert-warning my-3" role="alert">
+			<h4 class="alert-heading lead fs-5 fw-bold">Certificados Desabilitados</h4>
+			<p class="lead fs-6">Para realizar a emissão de certificados é necessário completar o cadastro de informações na plataforma.</p>
+			<hr>
+			<p class="mb-0 lead fs-5">Realize o preenchimento clicando <a asp-page="Identity" asp-area="Account">Perfil</a></p>
+		</div>
+	}
+
+	<h2>Histórico</h2>
+	<table class="table">
+		<thead class="align-middle">
+			<tr class="fw-bolder">
+				<td align="left">Tema</td>
+				<td align="center">Reuniões</td>
+				<td align="center">Percentual de Participação</td>
+				<td align="right">Ação</td>
+			</tr>
+		</thead>
+		<tbody class="align-middle">
+			@foreach (var history in Model.UserHistoric)
+			{
+				<tr class="lead fs-6">
+					<td align="left">@history.Name</td>
+					<td align="center">@history.FinishedMeetings/@history.TotalMeetings</td>
+					<td align="center">@history.PresenceRate%</td>
+					<td align="right">
+						@if(@Model.Certificates.Keys.Any(x => x.Equals(history.SeminarId)))
+						{
+							<a href="@Model.Certificates.GetValueOrDefault(history.SeminarId)" download="@string.Format("{0}.pdf", history.Name.Replace(" ","_").Trim())" target="_blank" class="btn btn-success btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+								Certificado
+							</a>
+						}
+						else
+						{
+							<a href="#" class="btn btn-secondary disabled" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+								Certificado
+							</a>
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</main>

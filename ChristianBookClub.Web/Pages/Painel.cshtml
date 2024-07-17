@@ -1,0 +1,187 @@
+﻿@page
+@using ChristianBookClub.Data.Entities
+@using ChristianBookClub.Domain.Models
+@using ChristianBookClub.Web.ViewModels
+@model PainelModel
+@{
+	ViewData["Title"] = "Painel";
+}
+
+<main class="container">
+	@if (Model.SeminarDetails.Any())
+	{
+		<div id="carouselExampleInterval" class="carousel slide mb-4" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				@foreach (var item in Model.SeminarDetails)
+				{
+					@if (Model.SeminarDetails.First() == item)
+					{
+						<div class="carousel-item active panel-banner border rounded" data-bs-interval="8500">
+							<div class="p-4 p-md-5 bg-body-secondary panel-banner text-bg-dark d-block w-100">
+								<div class="col-lg-6">
+									<span class="badge text-bg-secondary">Próximo Encontro</span>
+									@if (item.Registered)
+									{
+										<span class="badge text-bg-success">Inscrito</span>
+									}
+									<h1 class="display-5 text-roxborough light-text">@item.Name</h1>
+									<p class="col-md-8 fs-6 lead fw-semibold light-text">@item.NextMeeting</p>
+									<p class="col-md-8 fs-6 lead light-text">@item.Details</p>
+								</div>
+							</div>
+						</div>
+					}
+					else
+					{
+						<div class="carousel-item panel-banner border rounded" data-bs-interval="10000">
+							<div class="p-4 p-md-5 bg-body-secondary panel-banner text-bg-dark d-block w-100">
+								<div class="col-lg-6">
+									@if (item.Registered)
+									{
+										<span class="badge text-bg-success">Inscrito</span>
+									}
+									<h1 class="display-5 text-roxborough light-text">@item.Name</h1>
+									<p class="col-md-8 fs-6 lead fw-semibold light-text">@item.NextMeeting</p>
+									<p class="col-md-8 fs-6 lead light-text">@item.Details</p>
+								</div>
+							</div>
+						</div>
+					}
+				}
+			</div>
+		</div>
+	}
+
+	<div class="row align-items-md-stretch">
+		<div class="col-md-6">
+			<div class="h-100 p-2">
+				<h2>Programação</h2>
+				@if (Model.SeminarDetails.Any())
+				{
+					<table class="table">
+						<thead class="align-middle">
+							<tr class="fw-bolder">
+								<td align="left">Tema</td>
+								<td align="center">Inscrição</td>
+								<td align="right">Ação</td>
+							</tr>
+						</thead>
+						<tbody class="align-middle">
+							@foreach (SubscriptionViewModel subscription in Model.SeminarDetails)
+							{
+								<tr class="lead fs-6">
+									<td align="left">@subscription.Name</td>
+									@if (subscription.Registered)
+									{
+										<td align="center" class="text-success fw-semibold">
+											Realizada
+										</td>
+										<td align="right">
+											<!-- Button trigger modal -->
+											<button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" data-bs-toggle="modal" data-bs-target="@string.Format("#{0}", subscription.Name.Replace(" ", "").Trim())">
+												Remover
+											</button>
+
+											<!-- Modal -->
+											<div class="modal fade" id="@subscription.Name.Replace(" ","").Trim()" tabindex="-1" aria-labelledby="removeSubscriptionModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h3 class="lead fs-5 fw-bold" id="removeSubscriptionModalLabel">Tem Certeza?</h3>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body lead fs-6">
+															Ao remover sua inscrição em <strong>"@subscription.Name"</strong> as presenças registradas em encontros anterioress serão apagadas.
+															Caso opte por inscrever-se novamente o progresso contabilizado até o momento será perdido.
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+															<a type="button"
+															   class="btn btn-danger"
+															   asp-page-handler="Unsubscribe"
+															   asp-route-seminarId="@subscription.SeminarId">
+																Sim, Prosseguir
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									}
+									else
+									{
+										<td align="center" class="text-secondary">
+											Não Realizada
+										</td>
+										<td align="right">
+											<a type="button"
+											   class="btn btn-outline-success"
+											   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+											   asp-page-handler="Subscribe"
+											   asp-route-seminarId="@subscription.SeminarId">
+												Inscrever
+											</a>
+										</td>
+									}
+								</tr>
+							}
+						</tbody>
+					</table>
+				}
+				else
+				{
+					<p class="lead fs-5">Nenhuma programação disponível</p>
+				}
+			</div>
+		</div>
+		<div class="col-md-6 pt-2">
+			@if (Model.NextSeminarRoom is not null)
+			{
+				<input id="next-meeting" type="hidden" value="@Model.NextSeminarRoom.NextMeeting" />
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<span id="contador" class="d-inline-block mb-2 text-success lead fs-6 fw-semibold">Carregando Agenda...</span>
+						<h3 class="mb-0 fs-4">@Model.NextSeminarRoom.Name</h3>
+						<small class="my-1 text-muted">@DateOnly.Parse(Model.NextSeminarRoom.NextMeeting) às @TimeOnly.Parse(Model.NextSeminarRoom.NextMeeting)</small>
+
+						@if (Model.NextSeminarRoom.MeetingDetails.Length > 55)
+						{
+							<a href="#next-meeting" class="card-text mb-auto lead fs-6" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-title="@Model.NextSeminarRoom.Description"> @Model.NextSeminarRoom.MeetingDetails.Substring(0, 55) ...</a>
+						}
+						else
+						{
+							<p class="card-text my-auto lead fs-6">@Model.NextSeminarRoom.MeetingDetails</p>
+						}
+						<a id="enter-meeting"
+						   type="button"
+						   class="btn btn-outline-dark mt-2 disabled"
+						   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+						   asp-page-handler="AttendMeeting"
+						   asp-route-scheduleId="@Model.NextSeminarRoom.ScheduleId">
+							Entrar na Reunião
+						</a>
+					</div>
+					<div class="col-auto d-none d-lg-block">
+						@if (string.IsNullOrEmpty(Model.NextSeminarRoom.CoverImage))
+						{
+							<img src="img/EstudoBiblico.webp" width="167" height="250" alt="Capa de Livro com dizeres: 'Estudo Bíblico'" />
+						}
+						else
+						{
+							<img src="@Html.Raw(Model.NextSeminarRoom.CoverImage)" width="167" height="250" alt="Capa do Livro: @Model.NextSeminarRoom.Name" />
+						}
+					</div>
+				</div>
+			}
+			else
+			{
+				<div class="alert alert-secondary no-schedule" role="alert">
+					<h4 class="alert-heading">Sem Agenda Disponível</h4>
+					<p class="lead">Inscreva-se em alguma programação para visualizar a próxima sala de reunião disponível.</p>
+					<hr>
+					<small class="mb-0 lead fs-6"><strong>Importante: </strong>Sua inscrição é essencial para que possamos identificar seu percentual de participação ao emitir seu certificado de participação</small>
+				</div>
+			}
+		</div>
+	</div>
+</main>

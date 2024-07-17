@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fé Entre Linhas</title>
+    
+    
+    <link rel="preload stylesheet" as="style" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preload stylesheet" as="style" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="preload" fetchpriority="high" as="image" href="~/img/Banner1.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="~/img/Banner2.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="~/img/Banner4.webp" type="image/webp">
+
+    <link rel="preload" as="script" href="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" />
+    <link rel="preload" as="script" href="~/js/site.js" asp-append-version="true" />
+
+    <!-- Meta Tags SEO -->
+    <meta name="description" content="Descubra um clube do livro cristão dedicado a promover a leitura e o crescimento espiritual. Participe de discussões edificantes e encontre livros inspiradores.">
+    <meta name="keywords" content="clube do livro cristão, livros cristãos, leitura cristã, crescimento espiritual, fé, literatura cristã">
+    <meta name="author" content="Clube do Livro: Fé entre Linhas">
+    <meta name="robots" content="index, follow">
+
+</head>
+<body>
+    <header>
+        <div class="px-3 py-2 dark-bg border-bottom shadow-lg">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a asp-area="" asp-page="/Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto light-text text-decoration-none">
+                        <span class="fs-5 text-roxborough">Fé </span>
+                        <span class="text-slight">&nbsp;entre&nbsp;</span>
+                        <span class="fs-5 text-roxborough">Linhas</span>
+                    </a>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container py-5 main-content">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="row align-content-center align-items-center text-center text-body-secondary bg-body-tertiary">
+        <span class="fs-6 lead">
+            &copy; 2024 - Clube do Livro - <span class="fs-6 text-roxborough">Fé </span><span class="text-slight">&nbsp;entre&nbsp;</span><span class="fs-6 text-roxborough">Linhas</span> | Desenvolvido por <a href="mailto:rochajario@gmail.com" target="_blank">Jario Rocha</a>.
+        </span>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

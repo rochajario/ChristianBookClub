@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'Roxborough';
+    src: url('../fonts/RoxboroughCF-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Slight';
+    src: url('../fonts/Slight-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    aspect-ratio: unset !important;
+}
+
+.cover-container {
+    max-width: 42em;
+}
+
+.light-text {
+    color: #CEC3B2;
+}
+
+.dark-text {
+    color: #292623;
+}
+
+.main-banner {
+    height: 390px;
+    position: relative;
+    background-image: url("https://www.napratica.org.br/wp-content/uploads/2019/10/livros-mais-usados.jpg");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.info {
+    border-radius: 2.5px !important;
+    background-color: rgba(17, 123, 209, 0.925) !important;
+    color: aliceblue !important;
+}
+
+.main-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.700) 8%, rgb(8, 8, 8) 100%);
+    z-index: -1;
+}
+
+.main-banner .col-lg-6 {
+    position: relative;
+    z-index: 0;
+}
+
+.text-slight {
+    font-family: 'Slight', sans-serif;
+}
+
+.text-roxborough {
+    font-family: 'Roxborough', 'Times New Roman';
+}
+
+a {
+    color: #CEC3B2;
+    text-decoration: none;
+}

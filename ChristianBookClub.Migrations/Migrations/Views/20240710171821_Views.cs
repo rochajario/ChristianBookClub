@@ -47,7 +47,6 @@ namespace ChristianBookClub.Migrations.Migrations.Views
 		private void CreatePrivateUpcomingSeminarsView(MigrationBuilder migrateBuilder)
 		{
 			migrateBuilder.Sql(@"
-				CREATE VIEW RegisteredUpcomingSeminars AS
 				CREATE VIEW RegisteredUpcomingSeminars AS SELECT
                     s.Id as 'SeminarId',
                     s.Name,

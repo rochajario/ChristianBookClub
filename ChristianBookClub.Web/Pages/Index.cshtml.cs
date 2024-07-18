@@ -8,7 +8,7 @@ namespace BookClub.Pages
     {
         private readonly ILogger<IndexModel> _logger = logger;
 
-
+        public string EmailPattern { get { return @"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"; } }
         public void OnGet()
         {
         }

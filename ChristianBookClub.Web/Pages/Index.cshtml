@@ -1,8 +1,9 @@
 ﻿@page
+@using System.Text.RegularExpressions
 @model IndexModel
 @{
-	ViewData["Title"] = "Home";
-	Layout = null;
+    ViewData["Title"] = "Home";
+    Layout = null;
 }
 <!doctype html>
 <html lang="pt-BR">
@@ -41,39 +42,39 @@
             </h1>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secondary btn-lg m-3" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">
+                    data-bs-target="#staticBackdrop">
                 Quero me Inscrever
             </button>
 
             <!-- Modal -->
             <div class="modal fade dark-text" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content rounded-4 shadow">
                         <div class="modal-header p-5 pb-4 border-bottom-0">
                             <h1 class="fw-bold mb-0 fs-2">Seja Convidado para nosso grupo exclusivo no WhatsApp</h1>
                             <button id="btn-modal-close" type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                                    aria-label="Close"></button>
                         </div>
 
                         <div class="modal-body p-5 pt-0">
                             <form id="formulario" onsubmit="return cadastrarInteressado(event)">
                                 <div class="form-floating mb-3">
                                     <input name="entry.478680486" type="text" class="form-control rounded-3"
-                                        id="form-username" placeholder="Nome Completo" required>
+                                           id="form-username" placeholder="Nome Completo" required>
                                     <label for="form-username">Nome Completo</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input name="entry.988195862" type="email" class="form-control rounded-3"
-                                        id="form-email" placeholder="exemplo@email.com"
-                                        pattern="@string.Empty.Concat("[a-z0-9._%+-]+@[a-z0-9.-]+\\[a-z]{2,}$")" required
-                                        title="exemplo@email.com">
+                                           id="form-email" placeholder="exemplo@email.com"
+                                           pattern='@Model.EmailPattern' required
+                                           title="exemplo@email.com">
                                     <label for="form-email">E-mail</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input name="entry.576524440" type="text" class="form-control rounded-3"
-                                        id="form-cellphone" pattern="^\((\d{2})\) ?((\d{5})-(\d{4})|(\d{9}))$" required
-                                        title="(31)9XXXX-XXXX" placeholder="(31)9XXXX-XXXX">
+                                           id="form-cellphone" pattern="^\((\d{2})\) ?((\d{5})-(\d{4})|(\d{9}))$" required
+                                           title="(31)9XXXX-XXXX" placeholder="(31)9XXXX-XXXX">
                                     <label for="form-cellphone">Telefone</label>
                                 </div>
                                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-outline-success" type="submit">
@@ -103,13 +104,13 @@
             </div>
             <div class="position-fixed bottom-0 end-0 p-4">
                 <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
-                    aria-atomic="true">
+                     aria-atomic="true">
                     <div class="d-flex info">
                         <div id="toast-body" class="toast-body">
                             <!--Mensagem auto injetada via Javascript-->
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
+                                aria-label="Close"></button>
                     </div>
                 </div>
             </div>
@@ -117,8 +118,7 @@
 
         <footer class="mt-auto text-white-50">
             <span class="fs-6 lead">
-                &copy; 2024 - Clube do Livro - <span class="fs-6 text-roxborough">Fé </span><span
-                    class="text-slight">&nbsp;entre&nbsp;</span><span class="fs-6 text-roxborough">Linhas</span> |
+                &copy; 2024 - Clube do Livro - <span class="fs-6 text-roxborough">Fé </span><span class="text-slight">&nbsp;entre&nbsp;</span><span class="fs-6 text-roxborough">Linhas</span> |
                 Desenvolvido por <a href="mailto:rochajario@gmail.com" target="_blank">Jario Rocha</a>.
             </span>
         </footer>
@@ -160,8 +160,8 @@
             toastBootstrap.show();
         }
 
-        function gtag() { 
-            dataLayer.push(arguments); 
+        function gtag() {
+            dataLayer.push(arguments);
         }
 
         document.onload = () => {

@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build WebApp Docker image
-      run: ls -lvha
+      run: docker build ChristianBookClub.Web/ --file Dockerfile --tag christian_bookclub_webapp:$(date +%s)

@@ -1,11 +1,10 @@
-using ChristianBookClub.Data.Entities;
 using ChristianBookClub.Data;
-using Microsoft.EntityFrameworkCore;
+using ChristianBookClub.Data.Entities;
 using ChristianBookClub.Data.Interfaces;
 using ChristianBookClub.Data.Repositories;
 using ChristianBookClub.Domain.Interfaces;
 using ChristianBookClub.Domain.Services;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChristianBookClub.Web
 {

@@ -9,7 +9,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["../ChristianBookClub.Web/ChristianBookClub.Web.csproj", "ChristianBookClub.Web/"]
+COPY ["ChristianBookClub.Web/ChristianBookClub.Web.csproj", "ChristianBookClub.Web/"]
 RUN dotnet restore "./ChristianBookClub.Web/./ChristianBookClub.Web.csproj"
 COPY . .
 WORKDIR "/src/ChristianBookClub.Web"

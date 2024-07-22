@@ -74,9 +74,11 @@ namespace BookClub.Pages
 				});
 			});
 
+
+
 			if (registeredSeminars.Any())
 			{
-				var nextSeminar = registeredSeminars.FirstOrDefault(x => DateTime.Now <= x.NextMeeting.AddHours(1));
+				var nextSeminar = registeredSeminars.FirstOrDefault(x => BrazilTimeNow() <= x.NextMeeting.AddHours(1));
 				if (nextSeminar is not null)
 				{
 					NextSeminarRoom = new NextSeminarRoomViewModel(nextSeminar);
@@ -85,6 +87,10 @@ namespace BookClub.Pages
 				NextSeminarRoom = null;
 			}
 		}
+
+		private static DateTime BrazilTimeNow() => TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"));
 	}
+
+	
 
 }

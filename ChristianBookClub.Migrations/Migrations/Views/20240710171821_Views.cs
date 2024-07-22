@@ -17,7 +17,7 @@ namespace ChristianBookClub.Migrations.Migrations.Views
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-			migrationBuilder.Sql("DROP VIEW UpcomingSeminars;");
+			migrationBuilder.Sql("DROP VIEW PublicUpcomingSeminars;");
 			migrationBuilder.Sql("DROP VIEW RegisteredUpcomingSeminars;");
 		}
 
@@ -65,7 +65,7 @@ namespace ChristianBookClub.Migrations.Migrations.Views
                 INNER JOIN SeminarRegisters sr ON
 	                s.Id = sr.SeminarId
                 GROUP BY 1,3,4
-                ORDER BY 4;");
+                ORDER BY 4");
 		}
 	}
 }

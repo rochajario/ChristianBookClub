@@ -48,7 +48,7 @@ namespace ChristianBookClub.Migrations.Migrations.Views
 					rd.SureName,
 					SUM(rd.Finished) as 'FinishedMeetings',
 					COUNT(rd.SeminarId) as 'TotalMeetings',
-					CAST(((SUM(rd.Present)* 100)/ SUM(rd.SeminarId)) as FLOAT) as 'PresenceRate'
+					CAST(((SUM(rd.Present)* 100)/ COUNT(rd.SeminarId)) as FLOAT) as 'PresenceRate'
 				FROM
 					RawData rd
 				GROUP BY

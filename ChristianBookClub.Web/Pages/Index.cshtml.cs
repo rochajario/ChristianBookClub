@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookClub.Pages
 {
-    public class IndexModel(ILogger<IndexModel> logger) : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger = logger;
+	public class IndexModel(ISeminarService seminarService) : PageModel
+	{
+		private readonly ISeminarService _seminarService = seminarService;
 
-        public string EmailPattern { get { return @"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"; } }
-        public void OnGet()
-        {
-        }
-    }
+		public IEnumerable<PublicUpcomingSeminar> UpcomingSeminars { get; private set; } = Enumerable.Empty<PublicUpcomingSeminar>();
+
+		public void OnGet()
+		{
+			UpcomingSeminars = _seminarService.GetPublicUpcomingSeminars();
+		}
+	}
 }

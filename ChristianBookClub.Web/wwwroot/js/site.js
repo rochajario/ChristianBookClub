@@ -24,6 +24,10 @@
     const intervalo = setInterval(atualizarContador, 1000);
 }
 
+function gtag() {
+    dataLayer.push(arguments);
+}
+
 function ativaSalaDeReuniao() {
     document.getElementById("enter-meeting").className = "btn btn-success mt-2";
 }
@@ -36,6 +40,10 @@ window.onload = function () {
 
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    window.dataLayer = window.dataLayer || [];
+    gtag('js', new Date());
+    gtag('config', 'G-21GNPWD3TR');
 
     if (document.getElementById("next-meeting")) {
         const dataAlvo = new Date(document.getElementById("next-meeting").value);

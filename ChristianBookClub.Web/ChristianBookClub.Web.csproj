@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
-    <Content Remove="Pages\Home.cshtml" />
     <Content Remove="wwwroot\img\Certificate.png" />
     <Content Remove="wwwroot\img\CoffeeAndBook.jpg" />
     <Content Remove="wwwroot\img\CristianismoPuroESimples.jpg" />
@@ -24,7 +23,6 @@
   <ItemGroup>
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
     <None Include="Pages\Error.cshtml" />
-    <None Include="Pages\Home.cshtml" />
     <None Include="Pages\Index.cshtml" />
     <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_LoginPartial.cshtml" />

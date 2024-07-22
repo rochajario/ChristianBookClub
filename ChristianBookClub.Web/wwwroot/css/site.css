@@ -215,6 +215,11 @@ footer {
 }
 
 a {
+    color: #110E15;
+    text-decoration: none;
+}
+
+.menu-items {
     color: #110E15 !important;
     text-decoration: none !important;
 }

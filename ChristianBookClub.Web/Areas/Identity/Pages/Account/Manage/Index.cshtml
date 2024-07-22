@@ -16,15 +16,15 @@
 		<form id="profile-form" method="post">
 			<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 			<div class="form-floating mb-3 lead fs-6">
-				<input asp-for="Input.Firstname" class="form-control" placeholder="Informe o primeiro nome" />
+				<input asp-for="Input.Firstname" class="form-control" placeholder="Informe o primeiro nome" required data-pattern-error="Informe o Nome" />
 				<label asp-for="Input.Firstname" class="form-label"></label>
 			</div>
 			<div class="form-floating mb-3 lead fs-6">
-				<input asp-for="Input.Surename" class="form-control" placeholder="Informe o sobrenome" />
+				<input asp-for="Input.Surename" class="form-control" placeholder="Informe o sobrenome" required data-pattern-error="Informe o Sobrenome" />
 				<label asp-for="Input.Surename" class="form-label"></label>
 			</div>
 			<div class="form-floating mb-3 lead fs-6">
-				<input asp-for="Input.TelegramId" class="form-control" placeholder="Informe o Id do Chat no Telegram" />
+				<input asp-for="Input.TelegramId" class="form-control" placeholder="Informe o Id do Chat no Telegram" required data-pattern-error="Informe o Chat id do Telegram" />
 				<label asp-for="Input.TelegramId" class="form-label"></label>
 			</div>
 			<div class="form-floating mb-3 lead fs-6">

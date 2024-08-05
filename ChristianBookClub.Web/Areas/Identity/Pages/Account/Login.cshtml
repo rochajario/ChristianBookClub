@@ -1,54 +1,52 @@
 ﻿@page
 @model LoginModel
-
 @{
-	ViewData["Title"] = "Login";
+    ViewData["Title"] = "Realizar Login";
 }
 
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+            <h1 class="fw-bold mb-0 fs-2">Realizar Login</h1>
+        </div>
 
-<main class="container">
-	<div class="row flex-nowrap justify-content-center">
-		<div class="col-md-4">
-			<section>
-				<h1>@ViewData["Title"]</h1>
-				<form id="account" method="post">
-					<p class="lead fs-4">Entrar utilizando uma conta local</p>
-					<hr />
-					<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-					<div class="form-floating mb-3 lead fs-6">
-						<input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-						<label asp-for="Input.Email" class="form-label">E-mail</label>
-						<span asp-validation-for="Input.Email" class="text-danger"></span>
-					</div>
-					<div class="form-floating mb-3 lead fs-6">
-						<input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-						<label asp-for="Input.Password" class="form-label">Senha</label>
-						<span asp-validation-for="Input.Password" class="text-danger"></span>
-					</div>
-					<div class="checkbox mb-3 lead fs-6">
-						<label asp-for="Input.RememberMe" class="form-label">
-							<input class="form-check-input" asp-for="Input.RememberMe" />
-							@Html.DisplayNameFor(m => m.Input.RememberMe)
-						</label>
-					</div>
-					<div class="form-floating mb-3 lead fs-6">
-						<button id="login-submit" type="submit" class="w-100 btn btn-lg btn-outline-secondary mb-3">Entrar</button>
-						<div class="row flex-wrap justify-content-center align-content-center">
-							<span>
-								<a id="forgot-password" asp-page="./ForgotPassword">Esqueceu sua senha?</a>
-							</span>
-							<span>
-								<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Cadastrar novo usuário</a>
-							</span>
-						</div>
-					</div>
-				</form>
-			</section>
-		</div>
-	</div>
-</main>
-
+        <div class="modal-body p-5 pt-0">
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">E-mail</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Senha</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Entrar</button>
+                </div>
+                <hr class="my-4">
+                <a class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                    Cadastrar novo usuário
+                </a>
+                <a class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" id="forgot-password" asp-page="./ForgotPassword">
+                    Esqueceu sua senha?
+                </a>
+                <a class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" id="resend-confirmation" asp-page="./ResendEmailConfirmation">
+                    Reenviar e-mail de confirmação
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

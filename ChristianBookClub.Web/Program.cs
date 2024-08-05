@@ -2,9 +2,14 @@ using ChristianBookClub.Data;
 using ChristianBookClub.Data.Entities;
 using ChristianBookClub.Data.Interfaces;
 using ChristianBookClub.Data.Repositories;
+using ChristianBookClub.Domain.Extensions;
 using ChristianBookClub.Domain.Interfaces;
 using ChristianBookClub.Domain.Services;
+using ChristianBookClub.Web.Utils;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChristianBookClub.Web
 {
@@ -20,7 +25,11 @@ namespace ChristianBookClub.Web
             builder.Services
                 .AddTransient<ISeminarRepository, SeminarRepository>()
                 .AddTransient<ISeminarService, SeminarService>()
-                .AddTransient<ICertificateService, CertificateService>();
+                .AddTransient<ICertificateService, CertificateService>()
+                .AddFluentEMail(builder.Configuration)
+                .AddTransient<IEmailService, EmailService>()
+                .AddTransient<IEmailSender, EmailSender>();
+
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

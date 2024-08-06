@@ -73,6 +73,7 @@ namespace ChristianBookClub.Web.Areas.Identity.Pages.Account
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
+                host: "www.feentrelinhas.com",
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
             var email = _emailSender.SendEmailAsync(

@@ -6,10 +6,10 @@ namespace ChristianBookClub.Data.Interfaces
     {
 		ApplicationDbContext Context { get; }
 
-		void Create(T item);
+        void Create(T item);
         void Delete(long id);
+        void Update(long id, T item);
         IQueryable<T> GetAll();
         T GetById(long id);
-        void Update(long id, T item);
     }
 }

@@ -111,6 +111,7 @@ namespace BookClub.Areas.Identity.Pages.Account.Manage
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
+                    host: "www.feentrelinhas.com",
                     values: new { area = "Identity", userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
                 return RedirectToPage();

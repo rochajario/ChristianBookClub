@@ -73,12 +73,14 @@ namespace ChristianBookClub.Web.Areas.Identity.Pages.Account
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
+                host: "www.feentrelinhas.com",
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
+            var email = _emailSender.SendEmailAsync(
                 Input.Email,
                 "Confirme seu E-mail",
-                $"Confirme sua conta clicando <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>AQUI</a>.");
+                $"Confirme sua conta clicando <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>AQUI</a>.")
+                .ConfigureAwait(false);
 
             ModelState.AddModelError(string.Empty, "Email de verificação enviado.");
             return Page();

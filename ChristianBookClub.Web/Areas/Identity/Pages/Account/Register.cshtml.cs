@@ -122,11 +122,14 @@ namespace ChristianBookClub.Web.Areas.Identity.Pages.Account
 					var callbackUrl = Url.Page(
 						"/Account/ConfirmEmail",
 						pageHandler: null,
-						values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        host: "www.feentrelinhas.com",
+                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
 						protocol: Request.Scheme);
 
-					await _emailSender.SendEmailAsync(Input.Email, "Confirmação de E-mail",
-						$"Confirme seu e-mail <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+					var email = _emailSender.SendEmailAsync(
+						Input.Email, 
+						"Confirmação de E-mail",
+						$"Confirme seu e-mail <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.").ConfigureAwait(false);
 
 					if (_userManager.Options.SignIn.RequireConfirmedAccount)
 					{

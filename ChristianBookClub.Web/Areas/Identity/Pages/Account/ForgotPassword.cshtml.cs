@@ -67,14 +67,15 @@ namespace ChristianBookClub.Web.Areas.Identity.Pages.Account
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
-                    pageHandler: null,
+                    pageHandler: "",
+                    host:"www.feentrelinhas.com",
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
+                var email = _emailSender.SendEmailAsync(
                     Input.Email,
                     "Alteração de Senha",
-                    $"Altere sua senha <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui.</a>.");
+                    $"Altere sua senha <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui.</a>.").ConfigureAwait(false);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

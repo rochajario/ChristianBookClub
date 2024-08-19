@@ -22,7 +22,10 @@ namespace ChristianBookClub.Domain.Extensions
 				Credentials = new NetworkCredential(emailSettings["Username"], emailSettings["Password"])
 			};
 
-			services.AddFluentEmail(defaultFromEmail);
+			services
+				.AddFluentEmail(defaultFromEmail)
+				.AddSmtpSender(client);
+
 			services.AddSingleton<ISender>(x => new SmtpSender(client));
 			return services;
 		}
